@@ -1,7 +1,6 @@
 # login-system
 
-## Build a login system for a web application and ensure that user passwords are stored
-## securely.
+## Build a login system for a web application and ensure that user passwords are stored securely.
 Describe a system that: <br />
 1. Stores user passwords in a way that makes it difficult for an attacker who gains
 access to the database to determine users' actual passwords.<br/>
