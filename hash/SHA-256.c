@@ -162,10 +162,3 @@ char* SHA256(char* data) {
 
 	return hashStr;
 }
-
-
-int main(void)
-{
-    char data[] = "mynameiskhan";
-    printf("the hash is: %s\n", SHA256(data));
-}
