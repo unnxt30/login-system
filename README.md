@@ -7,3 +7,6 @@ access to the database to determine users' actual passwords.<br/>
 2. Allows users to log in by verifying their password without storing the password in
 plain text.<br/>
 3. Provides an additional layer of security to prevent brute-force attack<br/>
+
+### Approach:
+
