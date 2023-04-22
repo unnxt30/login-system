@@ -1,4 +1,4 @@
-# login-system
+# Login-System for a Web Application.
 
 ### Build a login system for a web application and ensure that user passwords are stored securely.
 Describe a system that: <br />
