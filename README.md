@@ -10,3 +10,4 @@ plain text.<br/>
 
 ### Approach:
 
+-> Not storing the password in plain text format, using a Simple Hashing Algorithm (SHA-256) for safety. <br/>
