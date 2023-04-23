@@ -7,11 +7,14 @@
 #include "libs/data.h"
 
 #define N 100
-#define len 8
+
 
 #define true 1
 #define false 0
 typedef char* string;
+
+void signUp();
+void login();
 
 int main(){
 
@@ -83,24 +86,17 @@ void signUp(){
         }
 
     }
-he conflict editor on GitHub to resolve competing line change merge conflicts between branches that are part of a pull reques
+
     string hash = SHA256(pass1);
 
-    insert(username, hash);
+    //insert(username, hash);
 
 }
 
-node* found(string input, int pass){
+void login(){
 
+    return;
 
-
-    return NULL;
-
-}
-
-int ascii(char c)
-{
-    return (int) c;
 }
 
 int isspecial(char c)
@@ -174,18 +170,6 @@ char *generate_password(void)
    password[password_length] = '\0';
    
    return password;
-}
-
-
-int hashFunction(char *user)
-{   
-    int sum = 0;
-    for(int i = 0; i<len; i++)
-    {
-        sum += ascii(user[i]);
-    }
-
-    return sum % 3;
 }
 
 typedef struct 
