@@ -1,12 +1,102 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdio.h>
+#include <string.h>
 #include <ctype.h>
 #include <time.h>
-#include "hash/SHA-256.c"
+#include "libs/SHA-256.c"
+#include "libs/data.h"
 
 #define N 100
 #define len 8
+
+#define true 1
+#define false 0
+typedef char* string;
+
+int main(){
+
+    printf("Welcome to the login portal...\n");
+
+    while(1){
+
+        printf("Press L to login using your username and password\n");
+        printf("Or press S to signup\n");
+        printf("==================================================\n");
+        printf("Press E to exit the login portal\n");
+
+        char s[10];
+        scanf("%s", s);
+        char in = s[0];
+
+        switch(in){
+
+            case 'l':
+                login();
+                break;
+            
+            case 's':
+                signUp();
+                break;
+            
+            case 'e':
+                printf("Thank you for using the login portal...\n");
+                return 0;
+
+            default:
+                printf("Invalid option selected...\n");
+
+        }
+
+
+    }
+
+}
+
+void signUp(){
+
+    printf("Please enter a username:\n");
+    string username = malloc(32);
+
+    while(1){
+        scanf("%s", username);
+        if(found(username, false)){
+            printf("The chosen username already exists. Please enter another username.\n");
+        }else{
+            break;
+        }
+    }
+
+    string pass1 = malloc(32);
+    string pass2 = malloc(32);
+
+    while(1){
+
+        printf("Please enter a strong password:\n");
+        scanf("%s", pass1);
+        printf("Re-enter your password:\n");
+        scanf("%s", pass2);
+
+        if(!strcmp(pass1, pass2)){
+            printf("The passwords do not match.\n");
+        }else{
+            break;
+        }
+
+    }
+he conflict editor on GitHub to resolve competing line change merge conflicts between branches that are part of a pull reques
+    string hash = SHA256(pass1);
+
+    insert(username, hash);
+
+}
+
+node* found(string input, int pass){
+
+
+
+    return NULL;
+
+}
 
 int ascii(char c)
 {
@@ -106,52 +196,3 @@ typedef struct
 user;
 
 user Users[N];
-
-
-int main(void)
-{   
-    // char choice;
-    // printf("Enter s -> Sign-Up or l -> Log-in: ");
-    // scanf("%c", &choice);
-
-    char username[20] ;
-    char Pass[8];
-    printf("Enter your username: ");
-    fgets(username, 20, stdin);
-
-    printf("Do you want to Generate a password? y/n: ");
-    char c;
-    scanf("%c", &c);
-
-    if(c == 'y')
-    {
-        strcpy(Pass, generate_password());
-    }
-    else
-    {   
-        while(1)
-        {
-            printf("Enter your Password you want to set: ");
-            scanf("%s", Pass);
-            if(check_pass(Pass))
-            {
-                printf("Your Password should be of length 8 and must contain atleast one Uppercase and special character\n");
-            }
-            else
-            {
-                return 0;
-            }
-            
-        }        
-    }
-
-    for(int i = 0; i<strlen(username);i++)
-    {
-        printf("%c", username[i]);
-    }
-    // int code = hashFunction(username);
-    // printf("%i\n", code);
-    // Users[code].name = username;
-    // Users[code].password = Pass;
-
-}
