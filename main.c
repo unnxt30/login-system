@@ -114,24 +114,25 @@ int main(void)
     // printf("Enter s -> Sign-Up or l -> Log-in: ");
     // scanf("%c", &choice);
 
-    char *userid ;
-    char *Pass;
-    printf("Enter your Username: ");
+    char username[20] ;
+    char Pass[8];
+    printf("Enter your username: ");
+    fgets(username, 20, stdin);
 
-    scanf("%s", userid);
-    printf("Do you want to Generate a password? y/n");
+    printf("Do you want to Generate a password? y/n: ");
     char c;
     scanf("%c", &c);
+
     if(c == 'y')
     {
-        Pass = generate_password();
+        strcpy(Pass, generate_password());
     }
     else
     {   
         while(1)
         {
             printf("Enter your Password you want to set: ");
-            fgets(Pass, 8, stdin);
+            scanf("%s", Pass);
             if(check_pass(Pass))
             {
                 printf("Your Password should be of length 8 and must contain atleast one Uppercase and special character\n");
@@ -141,12 +142,16 @@ int main(void)
                 return 0;
             }
             
-        }
-
-        int code = hashFunction(userid);
-        printf("%i\n", code);
-        Users[code].name = userid;
-        Users[code].password = Pass;
+        }        
     }
+
+    for(int i = 0; i<strlen(username);i++)
+    {
+        printf("%c", username[i]);
+    }
+    // int code = hashFunction(username);
+    // printf("%i\n", code);
+    // Users[code].name = username;
+    // Users[code].password = Pass;
 
 }
