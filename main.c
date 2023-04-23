@@ -83,7 +83,7 @@ void signUp(){
         }
 
     }
-
+he conflict editor on GitHub to resolve competing line change merge conflicts between branches that are part of a pull reques
     string hash = SHA256(pass1);
 
     insert(username, hash);
