@@ -31,7 +31,7 @@ int main(){
         scanf("%s", s);
         char in = s[0];
 
-        switch(in){
+        switch(tolower(in)){
 
             case 'l':
                 login();
@@ -49,69 +49,10 @@ int main(){
                 printf("Invalid option selected...\n");
 
         }
-
-
     }
 
 }
 
-void signUp(){
-
-    printf("Please enter a username:\n");
-    string username = malloc(32);
-
-    while(1){
-        scanf("%s", username);
-        if(found(username, false)){
-            printf("The chosen username already exists. Please enter another username.\n");
-        }else{
-            break;
-        }
-    }
-
-    string pass1 = malloc(32);
-    string pass2 = malloc(32);
-
-    while(1){
-
-        printf("Please enter a strong password:\n");
-        scanf("%s", pass1);
-        printf("Re-enter your password:\n");
-        scanf("%s", pass2);
-
-        if(!strcmp(pass1, pass2)){
-            printf("The passwords do not match.\n");
-        }else{
-            break;
-        }
-
-    }
-
-    string hash = SHA256(pass1);
-
-    //insert(username, hash);
-
-}
-
-void login(){
-
-    return;
-
-}
-
-int isspecial(char c)
-{
-    char special[] = "!@#$%^&*()_+-={}[]|\\:;\"'<>,.?/~`";
-
-    for(int i = 0; i<32; i++)
-    {
-        if(c == special[i])
-        {
-            return 1;
-        }
-    }
-    return 0;
-}
 
 
 //checks if the password is valid.
@@ -180,3 +121,92 @@ typedef struct
 user;
 
 user Users[N];
+
+void signUp(){
+
+    printf("Please enter a username:\n");
+    string username = malloc(32);
+
+    while(1){
+        scanf("%s", username);
+        if(found(username, false)){
+            printf("The chosen username already exists. Please enter another username.\n");
+        }else{
+            break;
+        }
+    }
+
+    string pass1 = malloc(8);
+    string pass2 = malloc(8);
+
+
+    printf("Do you want to Generate a password? y/n: ");
+    
+    char *c = malloc(256);
+    scanf("%s", c);
+
+    if(c[0] == 'y')
+    {
+        strcpy(pass1, generate_password());
+    }
+
+    else
+    {   
+        while(1)
+        {
+            printf("Enter your Password you want to set: ");
+            scanf("%s", pass1);
+
+            printf("Re-enter your password: ");
+            scanf("%s", pass2);
+            
+
+            if(strcmp(pass1,pass2))
+            {
+                printf("Passwords don't match enter again.\n");
+            }
+            else if(check_pass(pass1))
+            {
+                printf("Your Password should be of length 8 and must contain atleast one Uppercase and special character\n");
+            }
+            else
+            {
+                break;
+            }
+            
+        }   
+    } 
+
+    // while(1){
+
+    //     printf("Please enter a strong password:\n");
+    //     scanf("%s", pass1);
+    //     printf("Re-enter your password:\n");
+    //     scanf("%s", pass2);
+
+    //     if(!strcmp(pass1, pass2)){
+    //         printf("The passwords do not match.\n");
+    //     }else{
+    //         break;
+    //     }
+
+    string hash_pass = SHA256(pass1);
+
+    int index = hashFunction(username);
+    Users[index].name = username;
+    Users[index].password = hash_pass; 
+
+}
+
+
+
+    //insert(username, hash);
+
+
+
+void login(){
+
+    return;
+
+}
+
