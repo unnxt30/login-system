@@ -11,3 +11,5 @@ plain text.<br/>
 ### Approach:
 
 -> Not storing the password in plain text format, using a Simple Hashing Algorithm (SHA-256) for safety. <br/>
+-> Using a Hash Table to store users and their passwords. <br/>
+-> Generating a (secure)password if user doesn't want to enter it manually. <br/>
