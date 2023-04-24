@@ -16,6 +16,14 @@ typedef char* string;
 
 node *table[SIZE];
 
+void init_table(void)
+{
+    for(int i = 0; i<SIZE; i++)
+    {
+        table[i] = NULL;
+    }
+}
+
 int ascii(char c)
 {
     return (int) c;
@@ -105,22 +113,25 @@ char *generate_password(void)
    return password;
 }
 
-node* found(string input, int pass){
+node* found(string input)
+{
+    int index = hashFunction(input);
+    node *tmp = table[index];
+    if(tmp == NULL)
+    {
+        return;
+    }
 
-    if(pass){
-
-        int index = hashFunction(input);
-
-
-
-    }else{
-
-
-
+    while(tmp != NULL)
+    {
+        if(!strcmp(tmp->username,input))
+        {   
+            return tmp;
+        }
+        tmp = tmp ->next;
     }
 
     return NULL;
-
 }
 
 void signUp(){
@@ -130,9 +141,12 @@ void signUp(){
 
     while(1){
         scanf("%s", username);
-        if(found(username, false)){
+        if(found(username))
+        {
             printf("The chosen username already exists. Please enter another username.\n");
-        }else{
+        }
+        else
+        {
             break;
         }
     }
@@ -155,7 +169,7 @@ void signUp(){
     {   
         while(1)
         {
-            printf("Enter your Password you want to set: ");
+            printf("Enter the Password you want to set: ");
             scanf("%s", pass1);
 
             printf("Re-enter your password: ");
@@ -185,19 +199,61 @@ void signUp(){
     node *tmp = malloc(sizeof(node));
     tmp ->username = username;
     tmp ->password = hash_pass;
-    table[index] = tmp;
+    tmp -> next = NULL;
+    
+    
+    if(table[index]==NULL)
+    {
+        table[index] = tmp;
+    }
+    else
+    {   
+        node *head = table[index];
+        while(head != NULL)
+        {
+            head = head -> next;
+        }
+        head = tmp;
+    }
+    
     
 
     printf("%s : %s\n", table[index]->username, table[index]->password);
 
 }
 
+void login(void)
+{   
+    node *tmp = malloc(sizeof(node));
+    printf("Please enter a username:\n");
+    string username = malloc(32);
+    scanf("%s", username);
 
+    printf("Enter your Password: ");
+    string password = malloc(8);
+    scanf("%s", password);
 
+    int index = hashFunction(username);
 
-void login(){
-
-    return;
-
+    if(found(username))
+    {   
+        tmp = found(username);
+        if(strcmp(SHA256(password), tmp->password))
+        {
+            printf("You've successfully logged in :) \n");
+            return;
+        }
+        else
+        {
+            printf("Incorrect password, enter credentials again :/ \n");
+            return;
+        }
+        
+    }
+    else
+    {
+        printf("The user doesn't exist :| \n");
+        return;
+    }
 }
 
