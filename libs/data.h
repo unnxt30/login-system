@@ -136,7 +136,7 @@ node* found(string input)
 
 void signUp(){
 
-    printf("Please enter a username:\n");
+    printf("Please enter a username: ");
     string username = malloc(32);
 
     while(1){
@@ -163,6 +163,7 @@ void signUp(){
     if(c[0] == 'y')
     {
         strcpy(pass1, generate_password());
+        printf("The generated password is: %s \n", pass1);
     }
 
     else
@@ -194,7 +195,6 @@ void signUp(){
 
     string hash_pass = SHA256(pass1);
     int index = hashFunction(username);
-    printf("%i\n", index);
 
     node *tmp = malloc(sizeof(node));
     tmp ->username = username;
@@ -216,16 +216,12 @@ void signUp(){
         head = tmp;
     }
     
-    
-
-    printf("%s : %s\n", table[index]->username, table[index]->password);
-
 }
 
 void login(void)
 {   
     node *tmp = malloc(sizeof(node));
-    printf("Please enter a username:\n");
+    printf("Please enter a username: ");
     string username = malloc(32);
     scanf("%s", username);
 
@@ -238,7 +234,7 @@ void login(void)
     if(found(username))
     {   
         tmp = found(username);
-        if(strcmp(SHA256(password), tmp->password))
+        if(!strcmp(SHA256(password), tmp->password))
         {
             printf("You've successfully logged in :) \n");
             return;

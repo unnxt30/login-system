@@ -12,11 +12,11 @@ int main(){
     printf("Welcome to the login portal...\n");
 
     while(1){
-
+        printf("==================================================\n");
         printf("Press L to login using your username and password\n");
         printf("Or press S to signup\n");
-        printf("==================================================\n");
         printf("Press E to exit the login portal\n");
+        printf("==================================================\n");
 
         char s[10];
         scanf("%s", s);
