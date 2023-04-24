@@ -16,7 +16,21 @@ int ascii(char c)
     return (int) c;
 }
 
-int hash(char *user)
+int isspecial(char c)
+{
+    char special[] = "!@#$%^&*()_+-={}[]|\\:;\"'<>,.?/~`";
+
+    for(int i = 0; i<32; i++)
+    {
+        if(c == special[i])
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int hashFunction(char *user)
 {   
     int sum = 0;
     for(int i = 0; i<len; i++)
@@ -24,14 +38,14 @@ int hash(char *user)
         sum += ascii(user[i]);
     }
 
-    return sum % 3;
+    return sum % strlen(user);
 }
 
 node* found(string input, int pass){
 
     if(pass){
 
-        int index = hash(input);
+        int index = hashFunction(input);
 
 
 
